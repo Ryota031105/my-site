@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const TodoItem = ({ item, deleteData, updateData, todos }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [editText, setEditText] = useState("");
+    const [editText, setEditText] = useState(item.content);
 
     const handleCheckboxChange = async (item) => {
         const todo = { ...item, checked: !item.checked };
@@ -14,8 +14,9 @@ const TodoItem = ({ item, deleteData, updateData, todos }) => {
     };
 
     const handleEdit = async (editText) => {
-        const todo = { id: (todos.length - 1), content: editText, checked: false };
+        const todo = { ...item, content: editText };
         await updateData(todo);
+        setIsEditing(false);
     }
 
     const handleCancel = () => {
@@ -27,6 +28,11 @@ const TodoItem = ({ item, deleteData, updateData, todos }) => {
         <>
             <hr />
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <input
+                    type="checkbox"
+                    checked={item.checked}
+                    onChange={() => handleCheckboxChange(item)}
+                />
                 {isEditing ? (
                     <>
                         <input
@@ -39,11 +45,6 @@ const TodoItem = ({ item, deleteData, updateData, todos }) => {
                     </>
                 ) : (
                     <>
-                        <input
-                            type="checkbox"
-                            checked={item.status}
-                            onChange={() => handleCheckboxChange(item)}
-                        />
                         <p>{item.content}</p>
                         <button onClick={() => setIsEditing(true)}>編集</button>
                         <button onClick={() => handleDelete(item)}>削除</button>

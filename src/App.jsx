@@ -5,7 +5,6 @@ import { dummyData } from './dummyData';
 import { fetchTodos, addTodo, deleteTodo, updateTodo } from './data';
 
 function App() {
-  const [dummys, setDummys] = useState(dummyData);
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {

@@ -30,7 +30,7 @@ export const addTodo = async (content) => {
         },
 
         body: JSON.stringify({
-            text: content,
+            content: content,
             checked: false
         })
     });
@@ -64,19 +64,17 @@ export const deleteTodo = async (id) => {
 
 // PATCHの処理（指定したIDの完了状態を更新）
 export const updateTodo = async (todo) => {
-    const url = `https://あなたのURL.supabase.co/rest/v1/todos?id=eq.${id}`;
+    const url = `https://klnxoyzpthinihfzvoyr.supabase.co/rest/v1/todos?id=eq.${todo.id}`;
 
     const response = await fetch(url, {
-        method: "PUT", // 一部更新なのでPATCH！
+        method: "PATCH", // 一部更新なのでPATCH！
         headers: {
-            "apikey": "あなたのAPIキー",
-            "Authorization": `Bearer あなたのAPIキー`,
+            "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsbnhveXpwdGhpbmloZnp2b3lyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTEyNDAsImV4cCI6MjA4NzE2NzI0MH0.ZehPXFno4XfqiN_-NG8xSamTrFs9CusZB6TSyfZ9psY",
+            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsbnhveXpwdGhpbmloZnp2b3lyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTEyNDAsImV4cCI6MjA4NzE2NzI0MH0.ZehPXFno4XfqiN_-NG8xSamTrFs9CusZB6TSyfZ9psY`,
             "Content-Type": "application/json"
         },
         // 現在の状態（currentStatus）の逆（!）を送信して上書きします
-        body: JSON.stringify({
-            todo
-        })
+        body: JSON.stringify(todo)
     });
 
     if (!response.ok) {
@@ -84,5 +82,4 @@ export const updateTodo = async (todo) => {
         throw new Error(errorMessage);
     }
 
-    return await response.json();
 };

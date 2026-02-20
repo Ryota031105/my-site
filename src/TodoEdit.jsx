@@ -4,7 +4,9 @@ const TodoEdit = ({ addData }) => {
     const [text, setText] = useState("");
 
     const handleAdd = async (text) => {
+        if (!text) return;
         await addData(text);
+        setText("");
     };
 
     return (
