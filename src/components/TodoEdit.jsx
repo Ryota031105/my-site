@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./TodoItem.module.css";
 
 const TodoEdit = ({ addData }) => {
     const [text, setText] = useState("");
@@ -17,7 +18,7 @@ const TodoEdit = ({ addData }) => {
                 onChange={(e) => setText(e.target.value)}
                 placeholder="内容を入力"
             />
-            <button onClick={() => handleAdd(text)}>+ 新規追加</button>
+            <button className={styles.buttonConfirm} onClick={() => handleAdd(text)}>+ 新規追加</button>
         </div>
     );
 };

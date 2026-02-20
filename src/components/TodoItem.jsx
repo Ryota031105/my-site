@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./TodoItem.module.css";
 
 const TodoItem = ({ item, deleteData, updateData, todos }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -40,18 +41,18 @@ const TodoItem = ({ item, deleteData, updateData, todos }) => {
                             value={editText}
                             onChange={(e) => setEditText(e.target.value)}
                         />
-                        <button onClick={() => handleEdit(editText)}>確定</button>
-                        <button onClick={() => handleCancel()} >取消</button>
+                        <button className={styles.buttonConfirm} onClick={() => handleEdit(editText)}>確定</button>
+                        <button className={styles.buttonDelete} onClick={() => handleCancel()} >取消</button>
                     </>
                 ) : (
                     <>
                         <p>{item.content}</p>
-                        <button onClick={() => setIsEditing(true)}>編集</button>
-                        <button onClick={() => handleDelete(item)}>削除</button>
+                        <button className={styles.buttonEdit} onClick={() => setIsEditing(true)}>編集</button>
+                        <button className={styles.buttonDelete} onClick={() => handleDelete(item)}>削除</button>
                     </>
                 )}
 
-            </div>
+            </div >
         </>
     );
 };

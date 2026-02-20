@@ -1,5 +1,5 @@
 export const fetchTodos = async () => {
-    const url = "https://klnxoyzpthinihfzvoyr.supabase.co/rest/v1/todos";
+    const url = "https://klnxoyzpthinihfzvoyr.supabase.co/rest/v1/todos?order=id.asc";
 
     const response = await fetch(url, {
         method: "GET", // ここでGET！
