@@ -1,19 +1,10 @@
 import { useState } from "react";
 
-const TodoEdit = ({ dummys, setDummys }) => {
+const TodoEdit = ({ addData }) => {
     const [text, setText] = useState("");
 
-    const handleAdd = (text) => {
-        if (!text) {
-            return;
-        }
-        const newDummy = {
-            id: dummys.length + 1,
-            content: text,
-            status: false
-        };
-        setDummys([...dummys, newDummy]);
-        setText("");
+    const handleAdd = async (text) => {
+        await addData(text);
     };
 
     return (

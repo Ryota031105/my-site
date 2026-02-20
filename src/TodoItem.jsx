@@ -1,37 +1,21 @@
 import { useState } from "react";
 
-const TodoItem = ({ item, dummys, setDummys }) => {
+const TodoItem = ({ item, deleteData, updateData, todos }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editText, setEditText] = useState("");
 
-    const handleCheckboxChange = (id) => {
-        setDummys(dummys.map((dummy) => {
-            if (dummy.id === id) {
-                return { ...dummy, status: !dummy.status };
-            }
-            return dummy;
-        }));
+    const handleCheckboxChange = async (item) => {
+        const todo = { ...item, checked: !item.checked };
+        await updateData(todo);
     };
 
-    const handleDelete = (targetItem) => {
-        setDummys(dummys
-            .filter((dummy) => dummy.id !== targetItem.id)
-            .map((dummy, index) => ({ ...dummy, id: index + 1 })));
+    const handleDelete = async (item) => {
+        await deleteData(item.id);
     };
 
-    const handleEdit = (editText) => {
-        if (!editText) {
-            return;
-        }
-        setDummys(dummys.map((dummy) => {
-            if (dummy.id === item.id) {
-                return { ...dummy, content: editText };
-            } else {
-                return dummy;
-            }
-        }))
-        setEditText("");
-        setIsEditing(false);
+    const handleEdit = async (editText) => {
+        const todo = { id: (todos.length - 1), content: editText, checked: false };
+        await updateData(todo);
     }
 
     const handleCancel = () => {
@@ -58,7 +42,7 @@ const TodoItem = ({ item, dummys, setDummys }) => {
                         <input
                             type="checkbox"
                             checked={item.status}
-                            onChange={() => handleCheckboxChange(item.id)}
+                            onChange={() => handleCheckboxChange(item)}
                         />
                         <p>{item.content}</p>
                         <button onClick={() => setIsEditing(true)}>編集</button>

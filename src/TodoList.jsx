@@ -1,14 +1,15 @@
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ dummys, setDummys }) => {
+const TodoList = ({ todos, deleteData, updateData }) => {
     return (
         <div>
             {dummys.map((item) => (
                 <TodoItem
                     key={item.id}
                     item={item}
-                    dummys={dummys}
-                    setDummys={setDummys}
+                    deleteData={deleteData}
+                    updateData={updateData}
+                    todos={todos}
                 />
             ))}
         </div>
