@@ -21,14 +21,14 @@ const TodoItem = ({ item, deleteData, updateData, todos }) => {
     }
 
     const handleCancel = () => {
-        setEditText("");
+        setEditText(item.content);
         setIsEditing(false);
     }
 
     return (
         <>
             <hr />
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div className={styles.item}>
                 <input
                     type="checkbox"
                     checked={item.checked}
@@ -37,6 +37,8 @@ const TodoItem = ({ item, deleteData, updateData, todos }) => {
                 {isEditing ? (
                     <>
                         <input
+                            className={styles.textBox}
+                            size="15"
                             type="text"
                             value={editText}
                             onChange={(e) => setEditText(e.target.value)}

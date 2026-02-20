@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./TodoItem.module.css";
+import styles from "./TodoEdit.module.css";
 
 const TodoEdit = ({ addData }) => {
     const [text, setText] = useState("");
@@ -13,6 +13,7 @@ const TodoEdit = ({ addData }) => {
     return (
         <div>
             <input
+                className={styles.textBox}
                 type="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
